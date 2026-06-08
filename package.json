@@ -1,0 +1,23 @@
+{
+  "name": "juego-js-prueba",
+  "version": "1.0.0",
+  "description": "es una prueba con Gemini, el código es de gemini",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Diegosolerfo/juego-js-prueba.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Diegosolerfo/juego-js-prueba/issues"
+  },
+  "homepage": "https://github.com/Diegosolerfo/juego-js-prueba#readme",
+  "dependencies": {
+    "puppeteer": "^25.1.0"
+  }
+}

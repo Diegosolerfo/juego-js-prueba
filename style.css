@@ -52,7 +52,7 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: 2rem;
 }
 
@@ -123,16 +123,20 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding-bottom: 2rem;
 }
 
 .game-header {
     background-color: #2C1F14;
     border-bottom: 2px solid #8B5A2B;
     width: 100%;
-    padding: 1rem;
+    padding: 0.8rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -142,12 +146,28 @@ main {
 .game-header h1 {
     color: #D4AF37;
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    text-align: center;
+    flex: 1;
+    font-family: 'MedievalSharp', cursive;
+}
+
+.game-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
 }
 
 .score-board {
     color: #EDE4C9;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.hp-board {
+    color: #ff4d4d;
+    font-size: 1rem;
     font-weight: bold;
 }
 
@@ -155,32 +175,31 @@ main {
     color: #D4AF37;
     text-decoration: none;
     border: 1px solid #8B5A2B;
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 0.8rem;
     border-radius: 4px;
+    font-size: 0.9rem;
 }
 
 .game-container {
     position: relative;
-    margin-top: 2rem;
+    margin-top: 1rem;
     box-shadow: 0 0 20px rgba(0,0,0,0.8);
     border: 4px solid #8B5A2B;
     
     /* --- NUEVAS REGLAS RESPONSIVAS --- */
-    width: 95vw; /* Toma casi todo el ancho en móviles */
-    max-width: 600px; /* Pero nunca supera los 600px en PC */
+    width: clamp(280px, min(90vw, 85dvh - 250px), 550px);
     aspect-ratio: 1 / 1; /* Mantiene la proporción cuadrada (15x15 tiles) */
     margin-left: auto; /* Centra el cuadro horizontalmente */
     margin-right: auto;
     box-sizing: border-box;
+    touch-action: none; /* Evita gestos de scroll sobre el canvas */
 }
 
 #gameCanvas {
     background-color: #1C140F;
     display: block;
-    
-    /* --- NUEVAS REGLAS RESPONSIVAS --- */
-    width: 100%; /* Se adapta al tamaño del .game-container */
-    height: 100%; /* Se adapta al tamaño del .game-container */
+    width: 100%;
+    height: 100%;
 }
 
 .overlay {
@@ -210,26 +229,39 @@ main {
 }
 
 /* --- Estilos de los Controles Móviles --- */
+.controls-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3.5rem;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+    padding: 0 1.5rem;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .mobile-controls {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 1.5rem;
-    gap: 0.5rem;
+    gap: 0.3rem;
 }
 
 .middle-controls {
     display: flex;
-    gap: 3rem;
+    gap: 2.2rem;
 }
 
 .control-btn {
     background-color: #D4AF37;
     border: 2px solid #8B5A2B;
     border-radius: 8px;
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
+    width: 54px;
+    height: 54px;
+    font-size: 1.3rem;
     color: #1C140F;
     cursor: pointer;
     display: flex;
@@ -240,8 +272,351 @@ main {
     touch-action: manipulation; /* Evita zoom en móviles */
 }
 
-.control-btn:active {
+.action-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn {
+    background-color: #8b1e1e !important;
+    border-color: #d4af37 !important;
+    color: #fff !important;
+    width: 64px !important;
+    height: 64px !important;
+    border-radius: 50% !important;
+    font-size: 1.6rem !important;
+    box-shadow: 0 4px 10px rgba(139, 30, 30, 0.6) !important;
+}
+
+.control-btn:active, .action-btn:active {
     background-color: #C5A059;
     transform: translateY(2px);
     box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.action-btn:active {
+    background-color: #b22222 !important;
+}
+
+/* --- Estilos de la Historia Interactiva --- */
+.story-body {
+    background-color: #14100c;
+    color: #f4ede0;
+    font-family: 'Cinzel', 'Georgia', serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.story-header {
+    background-color: #231812;
+    border-bottom: 3px solid #d4af37;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.story-header h1 {
+    color: #d4af37;
+    margin: 0;
+    font-size: 1.6rem;
+    text-align: center;
+    flex: 1;
+    font-family: 'MedievalSharp', cursive;
+}
+
+.story-container {
+    padding: 1.2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.act-selector {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.act-btn {
+    background: #231812;
+    color: #d4af37;
+    border: 2px solid #8b5a2b;
+    padding: 0.5rem 1rem;
+    font-family: 'MedievalSharp', cursive;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.act-btn:hover, .act-btn.active {
+    background: #d4af37;
+    color: #231812;
+    border-color: #d4af37;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    transform: translateY(-2px);
+}
+
+.story-content-wrapper {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.interactive-stage-card {
+    background-color: #1f1712;
+    border: 2px solid #5c4033;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stage-title {
+    color: #d4af37;
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    font-family: 'MedievalSharp', cursive;
+    font-size: 1.2rem;
+}
+
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    background-color: #0b0806;
+    border: 3px solid #8b5a2b;
+    border-radius: 4px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    overflow: hidden;
+}
+
+.canvas-wrapper canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 5 / 4;
+    cursor: pointer;
+    touch-action: none;
+}
+
+.canvas-instruction {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(11, 8, 6, 0.85);
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    pointer-events: none;
+    font-family: monospace;
+    letter-spacing: 0.5px;
+    animation: pulse 2s infinite;
+}
+
+.slider-container {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(35, 24, 18, 0.9);
+    border: 2px solid #8b5a2b;
+    color: #f4ede0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+.slider-container label {
+    font-size: 0.8rem;
+    font-family: 'MedievalSharp', cursive;
+    color: #d4af37;
+}
+
+.slider-container input[type="range"] {
+    width: 100%;
+    accent-color: #d4af37;
+    cursor: pointer;
+}
+
+.parchment-scroll {
+    background: radial-gradient(circle, #f9f5eb 60%, #e8dec9 100%);
+    border: 2px solid #5c4033;
+    border-radius: 8px;
+    box-shadow: inset 0 0 40px rgba(92, 64, 51, 0.3), 5px 5px 15px rgba(0, 0, 0, 0.5);
+    color: #2b1810;
+    padding: 1.5rem;
+    font-family: 'IM Fell DW Pica', 'Georgia', serif;
+    position: relative;
+    box-sizing: border-box;
+    min-height: 420px;
+}
+
+.parchment-scroll::before {
+    content: "";
+    position: absolute;
+    top: 5px; left: 5px; right: 5px; bottom: 5px;
+    border: 1px dashed rgba(92, 64, 51, 0.3);
+    pointer-events: none;
+}
+
+.parchment-content h2 {
+    margin-top: 0;
+    color: #8b1e1e;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.parchment-content h4 {
+    margin: 0.2rem 0 1rem 0;
+    color: #5c4033;
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+.divider {
+    border: none;
+    border-top: 2px solid #5c4033;
+    margin: 1rem 0;
+    opacity: 0.4;
+}
+
+.narrative-text {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.famous-quote {
+    border-left: 3px solid #8b1e1e;
+    padding-left: 1.2rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: #5c1e1e;
+    font-size: 1.15rem;
+}
+
+.famous-quote cite {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    color: #5c4033;
+    font-weight: bold;
+    font-family: 'Cinzel', serif;
+}
+
+.interactive-hint {
+    background-color: rgba(212, 175, 55, 0.15);
+    border: 1px solid #d4af37;
+    padding: 0.8rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #5c4033;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.hint-icon {
+    font-size: 1.2rem;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* --- Ajustes Responsivos Generales --- */
+@media (min-width: 768px) {
+    .controls-wrapper {
+        display: none !important;
+    }
+}
+
+@media (max-height: 650px) {
+    .controls-wrapper {
+        margin-top: 0.8rem;
+        gap: 2rem;
+    }
+    .control-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+    .action-btn {
+        width: 54px !important;
+        height: 54px !important;
+        font-size: 1.3rem !important;
+    }
+    .middle-controls {
+        gap: 1.8rem;
+    }
+}
+
+@media (max-width: 850px) {
+    .story-content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .story-header h1 {
+        font-size: 1.3rem;
+    }
+    .act-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+    }
+    .parchment-scroll {
+        padding: 1.2rem;
+        min-height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 1rem;
+    }
+    header h1 {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+    main {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    .card {
+        padding: 1rem;
+    }
+    .card img {
+        height: 180px;
+    }
+    .video-placeholder {
+        height: 180px;
+    }
 }

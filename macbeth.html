@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macbeth: Interactive Chronicles</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for Gothic/Medieval feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=IM+Fell+DW+Pica:ital@0;1&family=MedievalSharp&display=swap" rel="stylesheet">
+</head>
+<body class="story-body">
+    <header class="story-header">
+        <a href="index.html" class="btn-back">← Return</a>
+        <h1>Macbeth: Interactive Chronicles</h1>
+    </header>
+
+    <main class="story-container">
+        <!-- Act Selector Timeline -->
+        <nav class="act-selector">
+            <button class="act-btn active" data-act="1">Act I</button>
+            <button class="act-btn" data-act="2">Act II</button>
+            <button class="act-btn" data-act="3">Act III</button>
+            <button class="act-btn" data-act="4">Act IV</button>
+            <button class="act-btn" data-act="5">Act V</button>
+        </nav>
+
+        <div class="story-content-wrapper">
+            <!-- Left: Interactive Canvas-like stage -->
+            <section class="interactive-stage-card">
+                <h3 class="stage-title">Interactive Story Stage</h3>
+                <div class="canvas-wrapper">
+                    <!-- HTML5 Canvas for the interactive animations -->
+                    <canvas id="storyCanvas" width="500" height="400"></canvas>
+                    <div id="canvasInstruction" class="canvas-instruction">Interactive Element - Tap to Interact</div>
+                    <!-- Act V special slider overlay, hidden by default -->
+                    <div id="sliderContainer" class="slider-container hidden">
+                        <label for="woodSlider" id="sliderLabel">March Birnam Wood to Dunsinane (0%)</label>
+                        <input type="range" id="woodSlider" min="0" max="100" value="0">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right: Scroll details -->
+            <section class="parchment-scroll">
+                <div class="parchment-content">
+                    <h2 id="actTitle">Act I: The Prophecy</h2>
+                    <h4 id="actLocation">Location: A Foggy Heath near Forres</h4>
+                    <hr class="divider">
+                    <div id="actText" class="narrative-text">
+                        Returning from victorious battle, Macbeth and Banquo encounter three mysterious Witches. The sisters prophecy that Macbeth will become Thane of Cawdor and then King, while Banquo's descendants will inherit the throne. As the witches vanish, messengers arrive confirming Macbeth is indeed the new Thane of Cawdor. Ambition takes root in his heart.
+                    </div>
+                    <blockquote class="famous-quote">
+                        <p id="actQuote">"Fair is foul, and foul is fair: Hover through the fog and filthy air."</p>
+                        <cite id="actQuoteSource">— The Witches, Act I, Scene I</cite>
+                    </blockquote>
+                    <div class="interactive-hint">
+                        <span class="hint-icon">⚡</span>
+                        <span id="actHint">Tap the cauldron on the left to add ingredients and summon the witches' prophecies!</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="story.js"></script>
+</body>
+</html>
