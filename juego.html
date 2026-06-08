@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macbeth: Dagger's Labyrinth</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="game-body">
+    <header class="game-header">
+        <a href="index.html" class="btn-back">← Return to Keep</a>
+        <h1>Out, Damned Dagger!</h1>
+        <div class="score-board">Score: <span id="scoreValue">0</span></div>
+    </header>
+
+    <main class="game-container">
+        <div id="startScreen" class="overlay">
+            <h2>Act I: The Ambition</h2>
+            <p>Collect the Crowns of Ambition. Beware the phantoms of your mind.</p>
+            <button id="btnStart" class="btn">Draw Sword (Start)</button>
+        </div>
+        
+        <div id="gameOverScreen" class="overlay hidden">
+            <h2>"Blood will have blood..."</h2>
+            <p id="finalScore">Final Score: 0</p>
+            <button id="btnRestart" class="btn">Try Again</button>
+        </div>
+
+        <div id="levelCompleteScreen" class="overlay hidden">
+            <h2>Victory is yours... for now.</h2>
+            <p>All crowns collected.</p>
+            <button id="btnNextLevel" class="btn">Proceed to Act II</button>
+        </div>
+
+        <canvas id="gameCanvas" width="600" height="600"></canvas>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

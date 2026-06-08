@@ -1,211 +1,64 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Macbeth Project & Game</title>
-    <style>
-      /* Estilos Generales */
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #1a1a1a;
-        color: #f5f5f5;
-        margin: 0;
-        padding: 20px;
-        text-align: center;
-      }
-      container {
-        max-width: 800px;
-        margin: 0 auto;
-        display: block;
-      }
-      h1,
-      h2 {
-        color: #ff4a4a;
-      }
-      .section {
-        background: #2a2a2a;
-        padding: 20px;
-        margin: 20px 0;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-      }
-      iframe {
-        width: 100%;
-        max-width: 560px;
-        height: 315px;
-        border: none;
-        border-radius: 4px;
-      }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medieval Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>THE STORY OF MACBETH</h1>
+    </header>
 
-      /* Estilos del Juego */
-      #game-container {
-        position: relative;
-        width: 100%;
-        height: 400px;
-        background-color: #111;
-        border: 3px solid #ff4a4a;
-        border-radius: 8px;
-        overflow: hidden;
-        margin-top: 15px;
-        cursor: crosshair;
-      }
-      #macbeth {
-        position: absolute;
-        width: 60px;
-        height: 60px;
-        background-color: #ff4a4a;
-        color: white;
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        font-size: 12px;
-        user-select: none;
-        touch-action: none; /* Mejora respuesta en celular */
-        cursor: pointer;
-        box-shadow: 0 0 15px #ff0000;
-      }
-      .btn {
-        background-color: #ff4a4a;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-      }
-      .btn:hover {
-        background-color: #cc3333;
-      }
-      #score-board {
-        font-size: 18px;
-        margin: 10px 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Macbeth: Tragedia y Juego</h1>
+    <main>
+        <section id="game" class="card">
+            <h2>Battlefield (Game)</h2>
+            <img src="https://thumbs.dreamstime.com/b/escudo-de-casco-caballeros-y-dos-espadas-en-fondo-oscuro-con-cruz-negra-386517011.jpg" alt="Swords and armor">
+            <p>The ground is set. The interactive game logic will unfold here.</p>
+            <a href="juego.html" class="btn">Enter the Game</a>
+        </section>
 
-      <!-- Sección de Información y Video -->
-      <div class="section">
-        <h2>¿Qué es Macbeth?</h2>
-        <p>
-          Macbeth es una de las tragedias más célebres de William Shakespeare,
-          que dramatiza los efectos dañinos, físicos y psicológicos, de la
-          ambición política en aquellos que buscan el poder por sí mismo.
-        </p>
-        <!-- Reemplaza el ID de YouTube (dQw4w9WgXcQ) por el de tu video cuando lo tengas -->
-        <iframe
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-          allowfullscreen
-        ></iframe>
-      </div>
+        <section id="macbeth" class="card">
+            <h2>The Tragedy of Macbeth</h2>
+            <img src="https://st2.depositphotos.com/1756323/11163/i/450/depositphotos_111630490-stock-photo-fantasy-castle-in-the-mountains.jpg" alt="Medieval castle in the fog">
+            <p>Discover the ambition, power, and downfall in the lands of Scotland.</p>
+            <a href="macbeth.html" class="btn">Read the Story</a>
+        </section>
 
-      <!-- Sección de Exposición en Inglés -->
-      <div class="section">
-        <h2>English Presentation (Tribuna)</h2>
-        <p style="font-style: italic; color: #bbb">
-          "Welcome everyone. Today we are presenting Macbeth, a story about
-          ambition, guilt, and the downfall of a king. Driven by the prophecies
-          of three witches and his own wife, Lady Macbeth, he commits regicide
-          to take the throne, leading to a spiral of madness."
-        </p>
-      </div>
+        <div id="videos" class="video-container">
+            <section class="card">
+                <h2>Informational Video</h2>
+                <div class="video-placeholder">
+                    <!-- Placeholder for informational YouTube iframe -->
+                    <span>Placeholder for YouTube iframe (Informational)</span>
+                </div>
+            </section>
 
-      <!-- Sección del Juego -->
-      <div class="section">
-        <h2>¡Atrapa a Macbeth!</h2>
-        <p>
-          Haz clic o toca a Macbeth antes de que se mueva. ¡Tienes 20 segundos!
-        </p>
-        <div id="score-board">
-          Puntos: <span id="score">0</span> | Tiempo: <span id="time">20</span>s
+            <section class="card">
+                <h2>Commercial Video</h2>
+                <div class="video-placeholder">
+                    <!-- Placeholder for commercial YouTube iframe -->
+                    <span>Placeholder for YouTube iframe (Commercial)</span>
+                </div>
+            </section>
         </div>
-        <button class="btn" id="start-btn" onclick="startGame()">
-          Iniciar Juego
-        </button>
 
-        <div id="game-container">
-          <div
-            id="macbeth"
-            style="display: none"
-            onmousedown="catchMacbeth(event)"
-            ontouchstart="catchMacbeth(event)"
-          >
-            👑<br />Macbeth
-          </div>
-        </div>
-      </div>
-    </div>
+        <section id="resources" class="card">
+            <h2>Resources and Designs</h2>
+            <img src="https://static1.squarespace.com/static/646bb15205ede7654ba7ff7f/64f8c5b69071da65e0cf2b68/66b529cf6636c07c5b824079/1753157755077/Macbeth-Square.jpeg?format=1500w" alt="Medieval crown">
+            <p>Access the scrolls and visual designs of the campaign.</p>
+            <a href="https://canva.link/pni857demftbses" target="_blank" rel="noopener noreferrer" class="btn">Open in Canva</a>
+        </section>
 
-    <script>
-      // Lógica del Juego
-      let score = 0;
-      let timeLeft = 20;
-      let gameInterval;
-      let moveInterval;
-      const macbethId = document.getElementById("macbeth");
-      const scoreId = document.getElementById("score");
-      const timeId = document.getElementById("time");
-      const startBtn = document.getElementById("start-btn");
-      const container = document.getElementById("game-container");
+        <section id="trivia" class="card">
+            <h2>Game Trivia</h2>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTSGmINFkx-j1k3gx6UL_yUXq9fsngAy3SXg&s" alt="Medieval crown">
+            <p>Discover trivia about the game's story and characters.</p>
+            <a href="trivia.html" class="btn">Enter the Trivia</a>
+        </section>
+    </main>
 
-      function startGame() {
-        score = 0;
-        timeLeft = 20;
-        scoreId.textContent = score;
-        timeId.textContent = timeLeft;
-        startBtn.style.display = "none";
-        macbethId.style.display = "flex";
-
-        moveMacbeth();
-
-        // Intervalo para mover a Macbeth cada segundo
-        moveInterval = setInterval(moveMacbeth, 1000);
-
-        // Cuenta regresiva del juego
-        gameInterval = setInterval(() => {
-          timeLeft--;
-          timeId.textContent = timeLeft;
-
-          if (timeLeft <= 0) {
-            endGame();
-          }
-        }, 1000);
-      }
-
-      function moveMacbeth() {
-        // Calcular posiciones aleatorias dentro del contenedor contenedor seguro
-        const maxX = container.clientWidth - macbethId.clientWidth;
-        const maxY = container.clientHeight - macbethId.clientHeight;
-
-        const randomX = Math.floor(Math.random() * maxX);
-        const randomY = Math.floor(Math.random() * maxY);
-
-        macbethId.style.left = randomX + "px";
-        macbethId.style.top = randomY + "px";
-      }
-
-      function catchMacbeth(event) {
-        event.preventDefault(); // Evita doble click en móviles por el touch
-        score++;
-        scoreId.textContent = score;
-        moveMacbeth(); // Se mueve inmediatamente al atraparlo
-      }
-
-      function endGame() {
-        clearInterval(gameInterval);
-        clearInterval(moveInterval);
-        macbethId.style.display = "none";
-        startBtn.style.display = "inline-block";
-        alert(
-          "¡Juego terminado! Lograste atrapar a Macbeth " + score + " veces.",
-        );
-      }
-    </script>
-  </body>
+    <script src="script.js"></script>
+</body>
 </html>
