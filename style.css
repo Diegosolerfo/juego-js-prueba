@@ -196,3 +196,40 @@ main {
 .hidden {
     display: none !important;
 }
+
+/* --- Estilos de los Controles Móviles --- */
+.mobile-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5rem;
+    gap: 0.5rem;
+}
+
+.middle-controls {
+    display: flex;
+    gap: 3rem;
+}
+
+.control-btn {
+    background-color: #D4AF37;
+    border: 2px solid #8B5A2B;
+    border-radius: 8px;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    color: #1C140F;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+    user-select: none;
+    touch-action: manipulation; /* Evita zoom en móviles */
+}
+
+.control-btn:active {
+    background-color: #C5A059;
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
