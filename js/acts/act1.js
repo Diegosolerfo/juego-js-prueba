@@ -66,8 +66,8 @@ class Act1 {
         this.particles     = [];
         this.moveTimer     = 0;
         this.guardMoveTimer= 0;
-        this.stepInterval  = 0.18; // seconds between player steps
-        this.guardInterval = 0.34;
+        this.stepInterval  = 0.1; // seconds between player steps
+        this.guardInterval = 0.40;
     }
 
     cleanup() {}

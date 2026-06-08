@@ -183,9 +183,9 @@ class Act5 {
         const floorY = this.floorY;
 
         // ── Background: Dunsinane battlements ────────────────
-        const sky = ctx.createLinearGradient(0,0,0,H*0.65);
+        const sky = ctx.createLinearGradient(0,0,0,floorY);
         sky.addColorStop(0,'#04060a'); sky.addColorStop(1,'#1a0a0a');
-        ctx.fillStyle = sky; ctx.fillRect(0,0,W,H*0.65);
+        ctx.fillStyle = sky; ctx.fillRect(0,0,W,floorY);
 
         // Moon
         ctx.fillStyle = 'rgba(220,210,180,0.8)';
@@ -198,7 +198,7 @@ class Act5 {
             const bx = (b*bW - this.bgScroll*0.3) % (W+bW*2) - bW;
             ctx.fillRect(bx, H*0.32, bW*0.55, bH);
         }
-        ctx.fillRect(0, H*0.32+bH, W, H*0.65-bH-H*0.32);
+        ctx.fillRect(0, H*0.32+bH, W, floorY - (H*0.32+bH));
 
         // Ground (cobblestone)
         ctx.fillStyle = '#291a10';
@@ -484,12 +484,13 @@ class Act5 {
     }
 
     _spawnParticles(x, y, count, color) {
-        for (let i = 0; i < count; i++) {
-            this.particles.push({
-                x, y, vx:(Math.random()-0.5)*7, vy:(Math.random()-0.5)*7,
-                size:Math.random()*5+2, color, alpha:1, decay:0.025+Math.random()*0.025
-            });
-        }
+        // Efectos especiales removidos a petición del usuario.
+        // for (let i = 0; i < count; i++) {
+        //     this.particles.push({
+        //         x, y, vx:(Math.random()-0.5)*7, vy:(Math.random()-0.5)*7,
+        //         size:Math.random()*5+2, color, alpha:1, decay:0.025+Math.random()*0.025
+        //     });
+        // }
     }
 }
 
