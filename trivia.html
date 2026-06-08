@@ -14,56 +14,136 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
             min-height: 100dvh;
             margin: 0;
-            padding: 1.5rem;
+            padding: 2rem 1rem;
             box-sizing: border-box;
-            text-align: center;
         }
-        .trivia-card {
+        .trivia-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .trivia-header h1 {
+            color: #d4af37;
+            font-family: 'MedievalSharp', cursive;
+            font-size: 2.5rem;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+        #score-display {
+            font-size: 1.5rem;
+            color: #ede4c9;
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+        .trivia-form-container {
             background-color: #2b1f18;
             border: 3px solid #d4af37;
             border-radius: 8px;
-            padding: 2.5rem 1.5rem;
-            max-width: 500px;
+            padding: 2rem;
+            max-width: 800px;
             width: 100%;
             box-shadow: 0 10px 25px rgba(0,0,0,0.7);
             box-sizing: border-box;
-        }
-        .trivia-card h1 {
-            color: #d4af37;
-            font-family: 'MedievalSharp', cursive;
-            margin-top: 0;
-            font-size: 2rem;
-            letter-spacing: 1.5px;
-        }
-        .trivia-card p {
-            font-size: 1.1rem;
-            line-height: 1.6;
             margin-bottom: 2rem;
-            color: #ede4c9;
         }
-        .scroll-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .question-block {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #5c4033;
+        }
+        .question-block:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .question-block h3 {
+            color: #d4af37;
+            font-family: 'Georgia', serif;
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+        .result-star {
+            font-weight: bold;
+            color: #ffcc00;
+            font-size: 1.1rem;
             display: inline-block;
-            animation: float 3s ease-in-out infinite;
+            margin-bottom: 1rem;
+            min-height: 1.5rem;
         }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .option-label {
+            background-color: #1a1512;
+            border: 1px solid #5c4033;
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        .option-label:hover {
+            border-color: #d4af37;
+        }
+        .option-label input[type="radio"] {
+            margin-right: 1rem;
+            accent-color: #d4af37;
+            transform: scale(1.2);
+        }
+        .option-label.correct {
+            background-color: rgba(46, 204, 113, 0.2);
+            border-color: #2ecc71;
+            color: #2ecc71;
+        }
+        .option-label.incorrect {
+            background-color: rgba(231, 76, 60, 0.2);
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+        .option-label.correct-hint {
+            border-color: #2ecc71;
+            color: #2ecc71;
+        }
+        .btn-return {
+            background-color: #8b1e1e;
+            color: #ede4c9;
+            border: 2px solid #d4af37;
+            padding: 0.8rem 2rem;
+            font-family: 'MedievalSharp', cursive;
+            font-size: 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-return:hover {
+            background-color: #d4af37;
+            color: #1a0f0a;
         }
     </style>
 </head>
 <body class="trivia-body">
-    <div class="trivia-card">
-        <span class="scroll-icon">📜</span>
+    
+    <div class="trivia-header">
         <h1>Macbeth Trivia</h1>
-        <p>The royal scrolls are being prepared. This trivia game, full of questions about the ambition of Macbeth and the prophecies of the witches, will be unlocked soon.</p>
-        <a href="index.html" class="btn">Return to Kingdom</a>
+        <div id="score-display">Score: 0 / 10</div>
     </div>
+
+    <div class="trivia-form-container" id="trivia-form">
+        <!-- Questions will be injected here by trivia.js -->
+    </div>
+
+    <a href="index.html" class="btn-return">Return to Kingdom</a>
+
+    <script src="js/trivia-score.js"></script>
+    <script src="js/trivia.js"></script>
 </body>
 </html>
